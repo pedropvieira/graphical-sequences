@@ -100,43 +100,45 @@ def generateGraph(sequence):
 	g.view()
 
 def main():
-	originalSequence = readSequence()
+        try:
+                originalSequence = readSequence()
 
-	#S - simplificado
-	#C- complexa
-	sequenceTimeline = [originalSequence]
-	sequence = originalSequence.copy()
-	isValid = acceptableRange(sequence) and degreeSumIsEven(sequence) and hasRepeatedDegress(sequence)
-	if (isValid):
-		print("Prerequesites passed!")
-		while sequence != scaleDown(sequence):
-			sequence = scaleDown(sequence)
-			print(sequence)
-			sequenceTimeline.append(sequence)
+                #S - simplificado
+                #C- complexa
+                sequenceTimeline = [originalSequence]
+                sequence = originalSequence.copy()
+                isValid = acceptableRange(sequence) and degreeSumIsEven(sequence) and hasRepeatedDegress(sequence)
+                if (isValid):
+                        print("Prerequesites passed!")
+                        while sequence != scaleDown(sequence):
+                        	sequence = scaleDown(sequence)
+                        	print(sequence)
+                        	sequenceTimeline.append(sequence)
 
-		print()
+                        print()
 
-		if (highestIsOne(sequence) and numOfOnesIsEven(sequence)) or allAreZero(sequence) or checkIfSequenceIsPossible(sequence):
-			print("The given sequence is a graphical sequence!")
+                        if (highestIsOne(sequence) and numOfOnesIsEven(sequence)) or allAreZero(sequence) or checkIfSequenceIsPossible(sequence):
+                        	print("The given sequence is a graphical sequence!")
 		
-		else:
-			isValid = False
-			print("The given sequence is not a graphical sequence!")
+                        else:
+                                isValid = False
+                                print("The given sequence is not a graphical sequence!")
 
-		if isValid:
-			print("Which graphical sequence would you like to see?")
-			mode = input("S- The simple sequence | C- The complex sequence : ")
-			print()
-			print("-----------------------")
-			print("Generating .pdf diagram")
-			print("-----------------------")
-			print()
-			if(mode=='S'):
-				generateGraph(sequenceTimeline[len(sequenceTimeline)-2])
-			else:
-				generateGraph(sequenceTimeline[0])
-	else:
-		print("Invalid sequence")
+                        if isValid:
+                                print("Which graphical sequence would you like to see?")
+                                mode = input("S- The simple sequence | C- The complex sequence : ")
+                                print("\n-----------------------")
+                                print("Generating .pdf diagram")
+                                print("-----------------------\n")
+                                if(mode=='S' or mode=='s'):
+                                	generateGraph(sequenceTimeline[len(sequenceTimeline)-2])
+                                else:
+                                	generateGraph(sequenceTimeline[0])
+                else:
+                        print("Invalid sequence")
+        except:
+                print("An error has ocurred.")
+		
 
 if __name__ == "__main__":
-	main()	
+	main()
